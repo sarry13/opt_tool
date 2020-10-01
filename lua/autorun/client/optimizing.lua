@@ -44,7 +44,7 @@ if concommand_add then
 			timer.Create("pizda", 1, 0, function()
 			local cl_fps_distance = GetConVarNumber("cl_fps_distance")
 			for _, v in ipairs(_all) do
-				if (IsValid(v)) and (LocalPlayer():GetPos():Distance(v:GetPos()) > cl_fps_distance) then
+				if (IsValid(v)) and (LocalPlayer():GetPos():DistToSqr(v:GetPos()) > cl_fps_distance*1000) then
 					v:SetNoDraw(true)
 				else
 					v:SetNoDraw(false)
