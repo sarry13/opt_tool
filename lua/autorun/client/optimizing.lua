@@ -37,19 +37,15 @@ if concommand_add then
 				hook.Remove("Think", "simfphys_lights_managment") -- убейте тварь которая кодила симфиз
 			end
 			local LocalPlayer = LocalPlayer
-			local _all = {}
-			timer.Create("cache_ents", 5, 0, function()
-				_all = ents.GetAll()
-			end)
 			timer.Create("pizda", 1, 0, function()
-			local cl_fps_distance = GetConVarNumber("cl_fps_distance")
-			for _, v in ipairs(_all) do
-				if (IsValid(v)) and (LocalPlayer():GetPos():DistToSqr(v:GetPos()) > cl_fps_distance*1000) then
-					v:SetNoDraw(true)
-				else
-					v:SetNoDraw(false)
+				local cl_fps_distance = GetConVarNumber("cl_fps_distance")
+				for _, v in ipairs(ents.GetAll()) do
+					if (IsValid(v)) and (LocalPlayer():GetPos():DistToSqr(v:GetPos()) > cl_fps_distance*1000) then
+						v:SetNoDraw(true)
+					else
+						v:SetNoDraw(false)
+					end
 				end
-			end
 			end)
 			chat.AddText("Включено! Дальность прорисовки можно изменить командой cl_fps_distance.")
 		else
